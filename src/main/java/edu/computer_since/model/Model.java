@@ -10,6 +10,7 @@ public class Model{
 	
 	private StringBuilder Logger = null;
 	private int operation = 1;
+	private final int INFINITY = 2147483647;
 	
 	public Model(){
 		Logger = new StringBuilder();
@@ -163,8 +164,8 @@ public class Model{
 			iR[i] = inp[q + i];
 		}
 		
-		iL[n1 + 1] = 1000000000; 
-		iR[n2 + 1] = 1000000000;
+		iL[n1 + 1] = INFINITY; 
+		iR[n2 + 1] = INFINITY;
 		
 		int i = 1;
 		int j = 1;
