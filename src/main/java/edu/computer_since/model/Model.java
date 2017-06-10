@@ -53,8 +53,8 @@ public class Model{
 			case "Bubble Sort":
 				return bubbleSort(stringToArray(array));
 			
-			case "Insetion Sort":
-				return insertSort(stringToArray(array));
+			case "Insertion Sort":
+				return insertionSort(stringToArray(array));
 			
 			}
 		
@@ -95,9 +95,36 @@ public class Model{
 		return inp;
 	}
 	
-	public int[] insertSort(int[] inp){
-		int[] out = new int[inp.length];
-		return out;
+	public int[] insertionSort(int[] inp){
+		
+		int i = 0;
+		int j = 2;
+		int key = 0;
+		int operation = 1;
+		
+		for (;j < inp.length; j++){
+			
+			key = inp[j];
+			  
+			i = j - 1;
+			
+			while ((i > 0) && (inp[i] > key)){
+				inp[i + 1] = inp[i];
+				
+				i = i - 1;
+
+				printArray(inp);
+				Logger.append(" (" + operation + ")\n");
+				operation++;
+			}
+			
+			inp[i + 1] = key;
+		}
+
+		printArray(inp);
+		Logger.append(" (" + operation + ")\n");
+
+		return inp;
 	}
 	
 	public int[] mergeSort(int[] inp){
@@ -115,5 +142,16 @@ public class Model{
 	
 	public String getLogger(){
 		return Logger.toString();
+	}
+
+	public String getInizialValue(){
+		String out = "";
+		
+		int value = 10;
+		
+		for (int i = 1; i < 11; i++)
+			out += "" + (value--) + ((i < 10)?",":"");
+			
+		return out; 
 	}
 }

@@ -70,6 +70,14 @@ public class Controller
     	if (array != null) outText.setText(m.getLogger());
     	
      }
+
+    @FXML
+    private void handleGet(){
+   
+    	Model m = new Model();
+    
+    	edit.setText(m.getInizialValue());
+    }
     
     @FXML
     private void handleExit() {
