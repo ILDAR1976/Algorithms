@@ -7,6 +7,13 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class Model{
+	
+	private StringBuilder Logger = null;
+
+	public Model(){
+		Logger = new StringBuilder();
+	}
+	
 	public void copyText(TextArea area, TextField field){
 		area.setText(area.getText() + "\n" + field.getText());
 	}
@@ -39,9 +46,53 @@ public class Model{
 		return out;
 	}
 	
+	public int[] select(String inp, String array){
+		if (inp != null)
+			switch (inp){
+			
+			case "Bubble Sort":
+				return bubbleSort(stringToArray(array));
+			
+			case "Insetion Sort":
+				return insertSort(stringToArray(array));
+			
+			}
+		
+		return null;
+	}
+	
 	public int[] bubbleSort(int[] inp){
 		int[] out = new int[inp.length];
-		return out;
+		
+		int buffer = 0;
+		
+		boolean flag = true;
+		
+		int operation = 1;
+		
+		while (flag) {
+		
+			flag = false;	
+			
+			for (int i = 1; i < inp.length - 1; i++) {
+				
+				if (inp[i] > inp[i + 1]) {
+					flag = true;
+					buffer = inp[i + 1];
+					inp[i + 1] = inp[i];
+					inp[i] = buffer;
+					
+				}
+				
+				printArray(inp);
+				Logger.append(" (" + operation + ")\n");
+				operation++;
+				
+			}
+			
+		}
+				
+		return inp;
 	}
 	
 	public int[] insertSort(int[] inp){
@@ -54,5 +105,15 @@ public class Model{
 		return out;
 	}
 
+	public void printArray(int[] inp){
 
+		for (int i = 1; i < inp.length; i++)
+			Logger.append(inp[i] + ((i < inp.length - 1)?", ":""));
+		
+		//if (Logger.length() != 0) Logger.append("\n");
+	}
+	
+	public String getLogger(){
+		return Logger.toString();
+	}
 }

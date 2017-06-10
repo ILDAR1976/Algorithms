@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="230.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.computer_since.view.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.computer_since.view.Controller">
    <children>
-      <Button fx:id="button_ok" layoutX="61.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleAddText" prefHeight="25.0" prefWidth="50.0" text="Calc" />
-      <TextField fx:id="edit" layoutX="14.0" layoutY="267.0" prefHeight="25.0" prefWidth="200.0" />
-      <TextArea fx:id="outText" layoutX="14.0" layoutY="14.0" prefHeight="240.0" prefWidth="200.0" />
-      <Button fx:id="button_exit" layoutX="119.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="25.0" prefWidth="50.0" text="Exit" />
+      <Button fx:id="button_ok" layoutX="182.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleCalc" prefHeight="25.0" prefWidth="50.0" text="Calc" />
+      <TextField fx:id="edit" layoutX="14.0" layoutY="319.0" prefHeight="25.0" prefWidth="276.0" />
+      <TextArea fx:id="outText" layoutX="14.0" layoutY="29.0" prefHeight="248.0" prefWidth="276.0" />
+      <Button fx:id="button_exit" layoutX="240.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="25.0" prefWidth="50.0" text="Exit" />
+      <ChoiceBox fx:id="selector" layoutX="14.0" layoutY="285.0" prefHeight="25.0" prefWidth="276.0" />
    </children>
 </AnchorPane>
