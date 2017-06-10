@@ -9,7 +9,8 @@ import javafx.scene.control.TextField;
 public class Model{
 	
 	private StringBuilder Logger = null;
-
+	private int operation = 1;
+	
 	public Model(){
 		Logger = new StringBuilder();
 	}
@@ -56,6 +57,10 @@ public class Model{
 			case "Insertion Sort":
 				return insertionSort(stringToArray(array));
 			
+			case "Merge Sort":
+				return mergeSort(stringToArray(array));
+
+				
 			}
 		
 		return null;
@@ -128,8 +133,56 @@ public class Model{
 	}
 	
 	public int[] mergeSort(int[] inp){
-		int[] out = new int[inp.length];
-		return out;
+		operation = 1;
+		mergeSortLocal(inp,1,inp.length - 1);
+		return inp;
+	}
+
+	public void mergeSortLocal(int[] inp,int p, int r){
+		if ( p < r) {
+			int q = (p + r) / 2;
+			mergeSortLocal(inp, p, q);
+			mergeSortLocal(inp, q + 1, r);
+			merge(inp, p, q, r);
+		}
+	}
+	
+	public void merge(int[] inp, int p, int q, int r ){
+		int n1 = q - p + 1;
+		int n2 = r - q;
+		
+		int[] iL = new int[n1 + 2];
+		
+		int[] iR = new int[n2 + 2];
+		
+		for (int i = 1; i <= n1; i++) {
+			iL[i] = inp[p + i - 1];
+		}
+		
+		for (int i = 1; i <= n2; i++) {
+			iR[i] = inp[q + i];
+		}
+		
+		iL[n1 + 1] = 1000000000; 
+		iR[n2 + 1] = 1000000000;
+		
+		int i = 1;
+		int j = 1;
+		
+		for (int k = p; k <= r; k++) {
+			if (iL[i] <= iR[j]) {
+				inp[k] = iL[i];
+				i++;
+			} else {
+				inp[k] = iR[j];
+				j++;
+			}
+			
+			printArray(inp);
+			Logger.append(" (" + operation + ")\n");
+			operation++;
+				
+		}
 	}
 
 	public void printArray(int[] inp){
