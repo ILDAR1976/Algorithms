@@ -2,6 +2,7 @@ package edu.computer_since.model;
 
 import java.beans.IndexedPropertyChangeEvent;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -61,7 +62,14 @@ public class Model{
 			case "Merge Sort":
 				return mergeSort(stringToArray(array));
 
-				
+			case "Shell Sort":
+				return shellSort(stringToArray(array));
+			
+			case "Quick Sort":
+				return quickSort(stringToArray(array));
+			
+			case "Tim Sort":
+				return timSort(stringToArray(array));
 			}
 		
 		return null;
@@ -186,12 +194,132 @@ public class Model{
 		}
 	}
 
-	public void printArray(int[] inp){
+	public int[] shellSort(int[] inp){
+		int i,j,k,t;
+		
+		final int N = inp.length;
+		
+		operation = 1;
+		
+		for(k = N/2; k > 0; k /=2)
+	        for(i = k; i < N; i++)
+	        {
+	            t = inp[i];
+	            for(j = i; j>=k; j-=k)
+	            {
+	                if(t < inp[j-k])
+	                    inp[j] = inp[j-k];
+	                else
+	                    break;
+					
+	                printArray(inp);
+					Logger.append(" (" + operation + ")\n");
+					operation++;
+
+	            }
+	            inp[j] = t;
+	        }
+        
+		printArray(inp);
+		Logger.append(" (" + operation + ")\n");
+		
+		return inp;
+	}
+	
+	public int[] quickSort(int[] inp){
+		
+		operation = 1;
+
+		quickSortLocal(inp, 1, inp.length - 1);
+		
+		return inp;
+	}
+	
+	private void quickSortLocal (int[] inp, int lo, int hi){
+		
+		int p;
+		
+	    if (lo < hi) {
+	        p = partition(inp, lo, hi);
+	        quickSortLocal(inp, lo, p - 1);
+	        quickSortLocal(inp, p + 1, hi);
+	    }
+	    
+	}
+	
+	private int partition(int[] inp, int lo, int hi){
+		
+		int pivot,i,j;
+	   
+		pivot = inp[hi];
+	    
+		i = lo - 1;
+	    
+	    for (j = lo; j < hi; j++) {
+		    
+	    	if (inp[j] <= pivot) {
+		    	i++;
+		    	swap(inp, i, j);
+		    }
+	
+	        printArray(inp);
+			Logger.append(" (" + operation + ")\n");
+			operation++;
+	        
+	    }
+	
+	    swap(inp, i + 1, hi); 
+
+        printArray(inp);
+		Logger.append(" (" + operation + ")\n");
+		operation++;
+
+		return i + 1;		
+	}
+	
+	private void swap(int[] inp, int a, int b){
+		if (a != b) {
+			inp[a] = inp[a] + inp[b]; 
+			inp[b] = inp[a] - inp[b]; 
+			inp[a] = inp[a] - inp[b];
+		}
+	}
+	
+	public int[] timSort(int[] inp){
+		Integer[] tsb = new Integer[inp.length];
+		
+		for (int i = 0; i < inp.length; i++) {
+			tsb[i] = inp[i];
+		}
+		
+		TimSort ts = new TimSort(new Integer[inp.length], NumberComparator);
+		
+		ts.sort(tsb, NumberComparator);
+		Logger.setLength(0);
+		Logger.append(ts.getLogger());
+		ts.clearLogger();
+		
+		for (int i = 0; i < inp.length; i++) {
+			inp[i] = tsb[i];
+		}
+		
+		return inp;
+	}
+	
+	public static Comparator<Integer> NumberComparator = new Comparator<Integer>() {
+		 
+        @Override
+        public int compare(Integer a, Integer b) {
+            return a.compareTo(b);
+        }
+    };
+    
+	
+ 	public void printArray(int[] inp){
 
 		for (int i = 1; i < inp.length; i++)
 			Logger.append(inp[i] + ((i < inp.length - 1)?", ":""));
 		
-		//if (Logger.length() != 0) Logger.append("\n");
 	}
 	
 	public String getLogger(){
